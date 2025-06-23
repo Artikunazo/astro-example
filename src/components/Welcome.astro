@@ -1,14 +1,43 @@
 ---
-import astroLogo from '../assets/astro.svg';
-import background from '../assets/background.svg';
+import { getCollection } from 'astro:content';
+// import { Book } from '../models/book.model';
+
+const books = await getCollection('books');
+console.log(books);
 ---
 
 <div id="container">
-	<img id="background" src={background.src} alt="" fetchpriority="high" />
+	<!-- <img id="background" src={background.src} alt="" fetchpriority="high" /> -->
 	<main>
-		
+		<h1 class="text-center text-7xl font-extrabold">Dev <span class="block">Books</span> </h1>
 	</main>
+
+	<section aria-label="Libros recomendados para programadores">
+		<div class="px-4 mx-auto max-w-screen-xl">
+			<div class="grid gap-6 md:grid-cols-2">
+				{
+					books.map((book: any) => {
+
+						const { slug, data} = book;
+
+						const { title, author, img, description, readtime, buy } = data;
+
+						<article>
+							<img src={`/img/${img}`} alt={title} class="w-full rounded-lg" />
+							<h3>{title}</h3>
+						</article>
+					})
+				}
+			</div>
+		</div>
+
+	</section>
 </div>
+<style>
+	h1{
+		color: black;
+	}
+</style>
 
 <!-- <style>
 	#background {

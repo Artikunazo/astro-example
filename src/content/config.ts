@@ -9,7 +9,7 @@ const books = defineCollection({
     description: z.string(),
     buy: z.object({
       spain: z.string().url(),
-      us: z.string().url(),
+      usa: z.string().url(),
     })
   })
 });
